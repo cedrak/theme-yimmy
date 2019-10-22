@@ -50,14 +50,22 @@ function fish_prompt
     set pcolor $red
   end
 
-  # Line 1
-  echo -n $red'┌'$cyan$USER$white'@'$cyan$__fish_prompt_hostname $gray(prompt_pwd)$normal
-  __fish_git_prompt
-  # Check for gwip; does last commit log contain --wip--?
-  if begin; git log -n 1 2> /dev/null | grep -qc "\-\-wip\-\-"; end
-    echo -n $brwhite' WIP!'$normal
+  # set path
+  set -l cwd (pwd | sed -e "s!^$HOME!~!g")
+  # output the prompt, left to right:
+  if [ (id -u) = "0" ];
+    set cwd (basename $cwd)
   end
-  echo
+
+  # Line 1
+  echo -n $red'┌'$cyan$USER'@'$__fish_prompt_hostname
+  echo (__fish_git_prompt) $gray $cwd$normal
+  #__fish_git_prompt
+  # Check for gwip; does last commit log contain --wip--?
+  #if begin; git log -n 1 2> /dev/null | grep -qc "\-\-wip\-\-"; end
+    #echo -n $brwhite' WIP!'$normal
+  #end
+  #echo
 
   # Line 2
   echo -n $red'└'$pcolor$__fish_prompt_char $normal
