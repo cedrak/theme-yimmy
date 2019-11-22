@@ -21,3 +21,7 @@ Dark colors.
 ### Configuration:
 
 - Disable Solarized colors in prompt with: `set -U yimmy_solarized false`
+
+### cmd's modifications
+
+* git info after hostname info
