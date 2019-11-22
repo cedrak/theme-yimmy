@@ -25,3 +25,4 @@ Dark colors.
 ### cmd's modifications
 
 * git info after hostname info
+* support for `virtualfish` added
