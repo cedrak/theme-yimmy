@@ -58,7 +58,11 @@ function fish_prompt
   end
 
   # Line 1
-  echo -n $red'┌'$cyan$USER'@'$__fish_prompt_hostname
+  if set -q VIRTUAL_ENV
+    echo -n -s $red'┌' (set_color -b blue white) "(" (basename "$VIRTUAL_ENV") ")" (set_color normal)
+  else
+    echo -n $red'┌'$cyan$USER'@'$__fish_prompt_hostname
+  end
   echo (__fish_git_prompt) $gray $cwd$normal
   #__fish_git_prompt
   # Check for gwip; does last commit log contain --wip--?
